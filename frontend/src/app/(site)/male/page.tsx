@@ -1,22 +1,37 @@
-import React from "react";
-import Event2 from "../../../../public/images/event3.png";
+import { client } from "@/lib/sanityClient";
+import { groq } from "next-sanity";
 import Image from "next/image";
-import { getProducts } from "../../../../sanity/schemas/sanity-utils";
 import Link from "next/link";
 
-const AllProducts = async () => {
-  let getAllProduts = await getProducts();
-  
+export const getMaleProductData = async () => {
+    const query = groq`*[_type == "product" && category == "Male"]{
+        _id,
+        name,
+        details,
+        price,
+        tags,
+        care,
+        "slug": slug.current,
+        "image": image.asset->url,
+    }`
 
-  
-  return (
-    <>  
+    const product = await client.fetch(query);
 
-     <div className="relative py-4 justify-center">
+    return product;
+  }
+
+
+ export default async function MaleProducts() {
+    let getMaleProducts = await getMaleProductData();
+   
+    // console.log("getData ==> ", getData)
+  
+    return (
+        <div className="relative py-4 justify-center">
       <div className="relative"> 
       <div className="grid max-w-md gap-8 px-4 mx-auto mt-12 sm:max-w-lg sm:px-6 lg:grid-cols-4 lg:max-w-7xl">
       {
-        getAllProduts.map((data: any) => {
+        getMaleProducts.map((data: any) => {
           return (            
              <div key={data._id} className="flex flex-col">
              <Link href={`/products/${data.slug}`} className='cursor-pointer focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-teal-400'>
@@ -45,8 +60,5 @@ const AllProducts = async () => {
       </div>
      </div>
      
-    </>
-  );
-};
-
-export default AllProducts;
+    )
+}

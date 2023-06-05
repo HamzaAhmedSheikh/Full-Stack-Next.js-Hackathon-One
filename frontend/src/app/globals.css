@@ -6,9 +6,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap');
 
 * {
-  @apply box-border p-0 m-0;
+  @apply p-0 m-0;
 }
-
+/* 
 html,
 body {
   @apply max-w-[100vw] overflow-hidden ;
@@ -16,5 +16,5 @@ body {
 
 a {
   @apply text-inherit no-underline;
-}
+} */
 

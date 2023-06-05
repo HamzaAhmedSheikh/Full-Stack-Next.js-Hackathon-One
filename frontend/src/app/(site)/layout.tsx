@@ -2,9 +2,10 @@ import Navbar from '../../components/Navbar'
 import '../globals.css'
 import { Inter } from 'next/font/google'
 import { StateContext } from '@/context/StateContext';
-import { ShoppingCartContext } from '@/context/ShoppingCartContext';
+import { ShoppingCartProvider } from '@/context/ShoppingCartContext';
 const inter = Inter({ subsets: ['latin'] })
 import { Toaster } from 'react-hot-toast';
+import { Provider } from '@/context/CartContext';
 
 export const metadata = {
   title: 'Create Next App',
@@ -19,11 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ShoppingCartContext> 
+        <StateContext> 
          <Navbar />
          <Toaster />
          {children}          
-        </ShoppingCartContext>       
+        </StateContext>       
       </body>
     </html>
   )

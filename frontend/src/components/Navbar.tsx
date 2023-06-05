@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo, useContext } from "react";
 import Image from "next/image";
 import { CiSearch } from "react-icons/ci";
 import { CgShoppingCart } from "react-icons/cg";
@@ -7,14 +7,47 @@ import logo from "../../public/images/Logo.png";
 import Link from "next/link";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import { useStateContext } from "@/context/StateContext";
-import { useShoppingCartContext } from "@/context/ShoppingCartContext";
+import { useShoppingCart } from "@/context/ShoppingCartContext";
+import { CartContext } from "@/context/CartContext";
 
 const Navbar = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
     // const {showCart, setShowCart, totalQty} = useStateContext();
-    const { cartCount } = useShoppingCartContext();
-    // console.log("ttoalQty", totalQty)
-    // const [searchTerm, setSearchTerm] = useState('')
+    const { cartQuantity } = useShoppingCart();
+    const { state } = useContext(CartContext);
+    const { cart } = state
+
+    const { decQty, incQty, qty } = useStateContext();
+    let itemCount = 0;
+
+    // for(const [key, value] of Object.entries(cart)) {      
+    //     itemCount = itemCount + cart[key].quantity;
+    // }   
+
+
+    useEffect(() => {
+      console.log("cart ==> ", cartQuantity)
+    }, [cartQuantity]);
+
+  
+
+    
+
+    
+
+
+    // const [localState, setLocalState] = useState(state);
+
+    // useEffect(() => {
+    //     console.log("===> ", state);
+    // }, [state]);
+
+    // console.log("===> ", localState);
+  
+    // return localState;
+   
+    
+   
   
     return (      
       <nav className="flex justify-between items-center my-8 mx-20">
@@ -41,8 +74,9 @@ const Navbar = () => {
           <button className='flex p-3 bg-[#F1F1F1] rounded-[50%] border-none relative transition-transform duration-[0.4s]'>   
             <CgShoppingCart size={22} /> 
    
-            <span className="absolute top-0 right-[5px] text-xs	text-[#eee] bg-[#f02d34] w-[18px] h-[18px] rounded-[50%] text-center font-semibold"> {cartCount} </span> 
-          </button>
+            <span className="absolute top-0 right-[5px] text-xs	text-[#eee] bg-[#f02d34] w-[18px] h-[18px] rounded-[50%] text-center font-semibold"> {qty} </span> 
+            
+          </button>          
         </Link> 
 
         {/* {showCart ?
@@ -72,7 +106,7 @@ const Navbar = () => {
                 <Link href='/cart'>
                     <button className="className='flex p-3 bg-[#F1F1F1] rounded-[50%] border-none relative transition-transform duration-[0.4s]">   
                       <CgShoppingCart size={22} />
-                      <span className='className="absolute top-0 right-[5px] text-xs	text-[#eee] bg-[#f02d34] w-[18px] h-[18px] rounded-[50%] text-center font-semibold"'>0</span> 
+                      <span className='className="absolute top-0 right-[5px] text-xs	text-[#eee] bg-[#f02d34] w-[18px] h-[18px] rounded-[50%] text-center font-semibold"'>{itemCount}</span> 
                     </button>
                 </Link> 
                 <Link href='/female'><li>Female</li></Link>

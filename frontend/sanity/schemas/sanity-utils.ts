@@ -31,3 +31,46 @@ export async function getProductBySlug(slug: string) {
 
     return product;
 }
+
+export const getMaleProductData = async () => {
+    const query = groq`*[_type == "product" && category == "Male"]{
+        _id,
+        name,
+        details,
+        price,
+        tags,
+        care,
+        "slug": slug.current,
+        "image": image.asset->url,
+    }`
+
+    const product = await client.fetch(query);
+
+    return product;
+  }
+
+  
+  export const getKidproductdata = async () => {
+    const res = await client.fetch(`*[_type == "product" && category == "Kid"]{
+      _id,
+      title,
+      price,
+      type,
+      image,
+      "slug" : slug.current
+    }`)
+    return res
+  }
+  
+export const getFemaleproductdata = async () => {
+    const res = await client.fetch(`*[_type == "product" && category == "Female"]{
+      _id,
+      title,
+      price,
+      type,
+      image,
+      "slug" : slug.current
+    }`)
+    return res
+  }
+

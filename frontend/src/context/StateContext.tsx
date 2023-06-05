@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 
 type ShoppingCartContext = {
   onAdd: (product: any, quantity: number) => void;  
-  toggleCartItemQuantity: (id: number, value: SetStateAction<number>) => void;
+  toggleCartItemQuantity: (_id: string, value: SetStateAction<string>) => void;
   incQty: () => void;
   decQty: () => void;
   qty: number;
@@ -29,7 +29,7 @@ export const StateContext = ({ children }: any) => {
   let index: any;
 
   const onAdd = (product: any, quantity: number) => {
-    console.log("product ==> ", product, "quantity", quantity);
+    console.log("product ==> ", product, "quantity ==> ", quantity);
     const checkProductInCart = cartItems.find(
       (item: any) => item._id === product._id
     );
@@ -61,10 +61,10 @@ export const StateContext = ({ children }: any) => {
     setCartItems(newCartItems);
   }
 
-  const toggleCartItemQuantity = (id: any, value: any) => {
-    foundProduct = cartItems.find((item) => item._id === id)
-    index = cartItems.findIndex((product) => product._id === id);
-    const newCartItems = cartItems.filter((item) => item._id !== id)
+  const toggleCartItemQuantity = (_id: string, value: any) => {
+    foundProduct = cartItems.find((item) => item._id === _id)
+    index = cartItems.findIndex((product) => product._id === _id);
+    const newCartItems = cartItems.filter((item) => item._id !== _id)
 
     if(value === 'inc') {
       setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity + 1 } ]);
