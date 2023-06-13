@@ -7,16 +7,15 @@ import logo from "../../public/images/Logo.png";
 import Link from "next/link";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import { useStateContext } from "@/context/StateContext";
-import { useShoppingCart } from "@/context/ShoppingCartContext";
-import { CartContext } from "@/context/CartContext";
 
-const Navbar = () => {
+
+
+
+function Navbar()  {    
     const [toggleMenu, setToggleMenu] = useState(false);
-    // const {showCart, setShowCart, totalQty} = useStateContext();
-    const { cartQuantity } = useShoppingCart();
-    const { state } = useContext(CartContext);
-    const { cart } = state
-
+    const {showCart, setShowCart, totalQty} = useStateContext(); 
+ 
+    
     const { decQty, incQty, qty } = useStateContext();
     let itemCount = 0;
 
@@ -26,8 +25,8 @@ const Navbar = () => {
 
 
     useEffect(() => {
-      console.log("cart ==> ", cartQuantity)
-    }, [cartQuantity]);
+      console.log("cart ==> ", totalQty)
+    }, [totalQty]);
 
   
 
@@ -74,7 +73,7 @@ const Navbar = () => {
           <button className='flex p-3 bg-[#F1F1F1] rounded-[50%] border-none relative transition-transform duration-[0.4s]'>   
             <CgShoppingCart size={22} /> 
    
-            <span className="absolute top-0 right-[5px] text-xs	text-[#eee] bg-[#f02d34] w-[18px] h-[18px] rounded-[50%] text-center font-semibold"> {qty} </span> 
+            <span className="absolute top-0 right-[5px] text-xs	text-[#eee] bg-[#f02d34] w-[18px] h-[18px] rounded-[50%] text-center font-semibold"> {totalQty} </span> 
             
           </button>          
         </Link> 
@@ -106,7 +105,7 @@ const Navbar = () => {
                 <Link href='/cart'>
                     <button className="className='flex p-3 bg-[#F1F1F1] rounded-[50%] border-none relative transition-transform duration-[0.4s]">   
                       <CgShoppingCart size={22} />
-                      <span className='className="absolute top-0 right-[5px] text-xs	text-[#eee] bg-[#f02d34] w-[18px] h-[18px] rounded-[50%] text-center font-semibold"'>{itemCount}</span> 
+                      <span className="absolute top-0 right-[5px] text-xs	text-[#eee] bg-[#f02d34] w-[18px] h-[18px] rounded-[50%] text-center font-semibold">{totalQty}</span> 
                     </button>
                 </Link> 
                 <Link href='/female'><li>Female</li></Link>

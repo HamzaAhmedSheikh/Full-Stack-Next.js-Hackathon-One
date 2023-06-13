@@ -7,32 +7,12 @@ import Image from "next/image";
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { CgShoppingCart } from "react-icons/cg";
 import { useStateContext } from "@/context/StateContext";
-import { useShoppingCart } from "@/context/ShoppingCartContext";
-import Counter from "@/components/Counter";
-import { CartContext } from "@/context/CartContext";
 
 type Props = {
     params: {
         products: string;
     };
 }
-
-// export async function getProductBySlug(slug: string) {
-//   const query =  groq`*[_type == "product" && slug.current == $slug][0]{
-//     _id,
-//     name,
-//     tags,
-//     price,
-//     "slug": slug.current,
-//     "image": image.asset->url,   
-//     details,
-//     care,   
-// }`;
-  
-//   const product = await client.fetch(query, { slug });
-
-//   return product;
-// }
 
 export async function getProduct(slug: string) {
   const query =  groq`*[_type == "product" && slug.current == "${slug}"][0]{
@@ -52,21 +32,12 @@ export async function getProduct(slug: string) {
 }
 
  
-  async function ProductDetails({ params }: Props) {     
-    const {
-      getItemQuantity,
-      increaseCartQuantity,
-      decreaseCartQuantity,
-      removeFromCart,
-    } = useShoppingCart()
-   
-    const { dispatch } = useContext(CartContext);
-    const {decQty, incQty, qty, onAdd} = useStateContext();
+  async function ProductDetails({ params }: Props) {       
+    const {decQty, incQty, qty, onAdd} = useStateContext();    
     const slug = params.products;
-   
+    let getProducts = await getProduct(slug);    
 
-    let getProducts = await getProduct(slug);
-
+     
       return(       
        
         <div className="container bg-[#FCFCFC] py-8 pl-8"> 
@@ -89,7 +60,7 @@ export async function getProduct(slug: string) {
 
            <div className='size'>         
            <p className="font-bold text-[0.8rem] text-[#212121] leading-4 tracking-wider">SELECT SIZE</p>
-            <ul className="flex gap-4 mt-4 ">
+            <ul className="flex gap-4 mt-4 ">            
               <li className="flex justify-center items-center rounded-[50%] text-[#666666] w-10 h-10 font-bold text-base leading-4 tracking-wider cursor-pointer hover:shadow-md">XS</li>
               <li className="flex justify-center items-center rounded-[50%] text-[#666666] w-10 h-10 font-bold text-base leading-4 tracking-wider cursor-pointer hover:shadow-md">S</li>
               <li className="flex justify-center items-center rounded-[50%] text-[#666666] w-10 h-10 font-bold text-base leading-4 tracking-wider cursor-pointer hover:shadow-md">M</li>

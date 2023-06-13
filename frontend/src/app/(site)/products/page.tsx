@@ -5,9 +5,9 @@ import { getProducts } from "../../../../sanity/schemas/sanity-utils";
 import Link from "next/link";
 
 const AllProducts = async () => {
-  let getAllProduts = await getProducts();
-  
-
+  let getAllProducts = await getProducts(); 
+   
+  // console.log("getAllProducts", getAllProducts )
   
   return (
     <>  
@@ -16,7 +16,7 @@ const AllProducts = async () => {
       <div className="relative"> 
       <div className="grid max-w-md gap-8 px-4 mx-auto mt-12 sm:max-w-lg sm:px-6 lg:grid-cols-4 lg:max-w-7xl">
       {
-        getAllProduts.map((data: any) => {
+        getAllProducts.map((data: any) => {
           return (            
              <div key={data._id} className="flex flex-col">
              <Link href={`/products/${data.slug}`} className='cursor-pointer focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-teal-400'>

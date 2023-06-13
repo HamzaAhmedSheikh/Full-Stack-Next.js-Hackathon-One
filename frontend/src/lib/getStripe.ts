@@ -1,13 +1,15 @@
-import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { Stripe, loadStripe } from "@stripe/stripe-js";
 
 let stripePromise: Promise<Stripe | null>;
 
-const getStripe = (): Promise<Stripe | null> => {
-  if (!stripePromise) {
-    stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY || '');
+const getStripePromise = () => {
+  const key = "pk_test_51NEAWFAbedfhBaKkXrvOtAOadiZIxa1A2aoeGFc6xaZs2Mxv5eOgkZK5A1Tac7GsV7fQJPvfgktoh6CtsidwqXTu00uEyI9K5q" || "";
+
+  if (!stripePromise && "pk_test_51NEAWFAbedfhBaKkXrvOtAOadiZIxa1A2aoeGFc6xaZs2Mxv5eOgkZK5A1Tac7GsV7fQJPvfgktoh6CtsidwqXTu00uEyI9K5q") {
+    stripePromise = loadStripe(key);
   }
 
   return stripePromise;
 };
 
-export default getStripe;
+export default getStripePromise;
