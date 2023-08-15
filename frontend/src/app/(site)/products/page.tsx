@@ -19,7 +19,7 @@ const AllProducts = async () => {
         getAllProducts.map((data: any) => {
           return (            
              <div key={data._id} className="flex flex-col">
-             <Link href={`/products/${data.slug}`} className='cursor-pointer focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-teal-400'>
+             <Link href={`/products/${data.slug}`} className='cursor-pointer hover:-translate-y-1 hover:scale-110 duration-300'>
                  {
                    data.image && (
                     <div>

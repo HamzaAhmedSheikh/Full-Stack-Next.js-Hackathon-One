@@ -1,14 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from "stripe";
-import { validateCartItems } from "use-shopping-cart/utilities"
 import { NextRequest, NextResponse } from 'next/server';
-import { inventory } from "@/config/inventory";
-// import { stripe } from "@/lib/stripe";
-import { useStateContext } from '@/context/StateContext';
-import { AiOutlineConsoleSql } from 'react-icons/ai';
 
 
-const stripe = new Stripe("sk_test_51NEAWFAbedfhBaKkIThoBULkyHpuXnD4TpQMebPEcJrAOyBQKQC4bRoIG7W1bS0WxSOXvVfiFynM0Fs7Lsw0wGIZ00rqUUCN04", {
+
+const stripe = new Stripe("", {
   apiVersion: "2022-11-15",
 });
 

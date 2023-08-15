@@ -1,54 +1,62 @@
 import Image from "next/image";
 import Link from "next/link";
+import img1 from "public/img-1.webp";
+import img2 from "public/img-2.webp";
+import img3 from "public/img-3.webp";
+
 export default function Promote() {
-    return (
-      <div className="flex flex-col justify-center items-center md:m-10 mt-10">
-        <div>
-          <div className="flex justify-center font-bold text-blue-700 mb-5">
-            PROMOTIONS
+    return (      
+      <>
+      <div className="text-center mt-20 font-semibold text-blue-900">PROMOTIONS</div>
+      <h1 className="text-center text-4xl font-bold"> Our Promotions Events</h1>
+      <div className="flex flex-col items-center lg:flex-row gap-8 mt-10 justify-center">
+        {/* left section */}
+        <div className="flex  flex-col gap-4">
+          {/* left secion 1 */}
+          <div className=" w-[350px] h-[187px] flex bg-slate-400">
+            <div className=" mt-8 ml-4">
+              <h3 className="font-bold text-3xl">GET UP TO 60% </h3>
+              <div className="text-lg">For the summer season</div>
+            </div>
+            <div className="mt-[34px] ">
+              <Image width={340} src={img1} alt="event1 " />
+            </div>
           </div>
-          <h2 className="scroll-m-20 border-b pb-2 text-2xl md:text-4xl font-semibold tracking-wide transition-colors first:mt-0">
-            Our Promotions Events
-          </h2>
+          {/* left section 2 div */}
+          <div className="w-[350px]  h-[187px] text-white bg-gray-800 flex justify-center items-center">
+            <div className="text-center">
+              <h3 className="text-4xl font-bold">GET 30% Off</h3>
+              <div className="mt-4">USE PROMO CODE</div>
+              <button className="bg-gray-700  h-10 w-60 rounded-[6px] ">DINEWEEKENDSALE</button>
+            </div>
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 md:p-10">
-          <div className="md:mx-20">
-              <div className="flex flex-col md:flex-row bg-[#d6d6d8] justify-center items-center px-10 py-5 w-[350px] md:w-[600px]">
-                  <div className="flex flex-col justify-center items-center">
-                      <div><h3 className="scroll-m-20 md:text-2xl font-semibold tracking-tight">GET UP TO</h3><span><h2 className="scroll-m-20 border-b pb-2 text-5xl font-semibold tracking-tight transition-colors first:mt-0">60%</h2></span></div>
-                      <div><h4 className="leading-7 text-lg [&:not(:first-child)]:mt-6 text-black-100">For the summer season</h4></div>
-                  </div>
-                  <img src='http://localhost:3000/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Flzplr4pt%2Fproduction%2F4e2ed6a9eaa6e1413843e53f3113ccfd2104c301-278x296.png&w=828&q=75' alt="girl"/>
+
+        {/* rignt section */}
+        <div>
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* vertical promotion card 1 */}
+            <div className="w-64 h-96 bg-[#efe1c7]">
+              <div className="mt-5 ml-5">Flex Sweatshirt</div>
+              <div className=" ml-5">
+                <s>$100.00</s>
+                <span className="ml-3 font-bold">$75.00</span>
+                <Image className="mt-[14px]" src={img2} alt="event2" />
               </div>
-              <div className="bg-[#212121] mt-5 flex flex-col justify-center items-center w-[350px] md:w-[600px]">
-                  <div className="m-10"><h2 className="scroll-m-20 pb-2 text-5xl font-semibold tracking-tight transition-colors first:mt-0 text-white">GET 30% OFF</h2></div>
-                  <div className="text-white">USE PROMO CODE</div>
-                  {/* <Button className="bg-[#474747] mb-10">DINEWEEKENDSALE</Button> */}
-                  <button className=' py-4 md:py-5 px-10 md:px-24 mb-10 bg-[#474747] '>
-                            <Link href='/' className='flex items-center justify-center gap-x-2'>
-                                <span className='text-white'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 8 8"><path fill="currentColor" d="M.34 1A.506.506 0 0 0 .5 2H2l.09.25l.41 1.25l.41 1.25c.04.13.21.25.34.25h3.5c.14 0 .3-.12.34-.25l.81-2.5c.04-.13-.02-.25-.16-.25H3.3l-.38-.72A.5.5 0 0 0 2.48 1h-2a.5.5 0 0 0-.09 0a.5.5 0 0 0-.06 0zM3.5 6c-.28 0-.5.22-.5.5s.22.5.5.5s.5-.22.5-.5s-.22-.5-.5-.5zm3 0c-.28 0-.5.22-.5.5s.22.5.5.5s.5-.22.5-.5s-.22-.5-.5-.5z" />
-                                    </svg>
-                                </span>
-                                <span className='font-medium text-white font-arimo'>
-                                   DINEWEEKENDSALE
-                                </span>
-                            </Link>
-                        </button>
+            </div>
+            {/* vertical promotion card 1 */}
+
+            <div className="w-64 h-96 bg-slate-300">
+              <div className="mt-5 ml-5">Flex Sweatshirt</div>
+              <div className=" ml-5">
+                <s>$100.00</s>
+                <span className="ml-2 font-bold">$75.00</span>
+                <Image className="mt-[9px]" src={img3} alt="event2" />
               </div>
+            </div>
           </div>
-          <div className="bg-[#efe1c7] md:mx-[250px] w-[350px] md:w-[300px] flex flex-col justify-center items-center mt-6 md:mt-0">
-            <h4 className="leading-7 text-lg [&:not(:first-child)]:mt-6 text-black-100">Flex Sweatshirt</h4>
-            <h4 className="leading-7 text-lg [&:not(:first-child)]:mt-1 text-black-100"><s>$100.00</s> <span className="font-bold">$75.00</span></h4>
-            <img src="http://localhost:3000/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Flzplr4pt%2Fproduction%2F4e2ed6a9eaa6e1413843e53f3113ccfd2104c301-278x296.png&w=828&q=75" alt="person2"/>
-          </div>
-          <div className="bg-[#d7d7d9] md:ml-[120px] w-[350px] md:w-[300px] flex flex-col justify-center items-center mt-6 md:mt-0">
-            <h4 className="leading-7 text-lg [&:not(:first-child)]:mt-6 text-black-100">Flex Push Button Bomber</h4>
-            <h4 className="leading-7 text-lg [&:not(:first-child)]:mt-1 text-black-100"><s>$225.00</s> <span className="font-bold">$190.00</span></h4>
-            <img src="http://localhost:3000/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Flzplr4pt%2Fproduction%2F4e2ed6a9eaa6e1413843e53f3113ccfd2104c301-278x296.png&w=828&q=75" alt="person3"/>
-          </div>
-  
         </div>
       </div>
+    </>
     );
   }

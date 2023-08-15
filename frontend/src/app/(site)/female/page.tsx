@@ -3,7 +3,7 @@ import { groq } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
 
-export const getFemaleProductData = async () => {
+const getFemaleProductData = async () => {
     const query = groq`*[_type == "product" && category == "Female"]{
         _id,
         name,
@@ -34,7 +34,7 @@ export const getFemaleProductData = async () => {
         getFemaleProducts.map((data: any) => {
           return (            
              <div key={data._id} className="flex flex-col">
-             <Link href={`/products/${data.slug}`} className='cursor-pointer focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-teal-400'>
+             <Link href={`/products/${data.slug}`} className='cursor-pointer hover:-translate-y-1 hover:scale-110 duration-300'>
                  {
                    data.image && (
                     <div>

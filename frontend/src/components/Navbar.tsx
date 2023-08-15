@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useMemo, useContext } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { CiSearch } from "react-icons/ci";
 import { CgShoppingCart } from "react-icons/cg";
@@ -14,19 +14,15 @@ import { useStateContext } from "@/context/StateContext";
 function Navbar()  {    
     const [toggleMenu, setToggleMenu] = useState(false);
     const {showCart, setShowCart, totalQty} = useStateContext(); 
- 
-    
-    const { decQty, incQty, qty } = useStateContext();
-    let itemCount = 0;
-
+       
     // for(const [key, value] of Object.entries(cart)) {      
     //     itemCount = itemCount + cart[key].quantity;
     // }   
 
 
-    useEffect(() => {
-      console.log("cart ==> ", totalQty)
-    }, [totalQty]);
+    // useEffect(() => {
+    //   console.log("cart ==> ", totalQty)
+    // }, [totalQty]);
 
   
 
@@ -78,19 +74,19 @@ function Navbar()  {
           </button>          
         </Link> 
 
-        {/* {showCart ?
+        {showCart ?
           <Link href='/cart'>
-            <button className='flex p-3 bg-[#F1F1F1] rounded-[50%] border-none relative transition-transform duration-[0.4s]' onClick={() => setShowCart(false)}>  
+            <button className='hidden p-3 bg-[#F1F1F1] rounded-[50%] border-none relative transition-transform duration-[0.4s]' onClick={() => setShowCart(false)}>  
               <CgShoppingCart size={22} />
               <span className='absolute top-0 right-[5px] text-xs	text-[#eee] bg-[#f02d34] w-[18px] h-[18px] rounded-[50%] text-center font-semibold'>{totalQty}</span> 
             </button>
           </Link> 
         : 
-          <button className='flex p-3 bg-[#F1F1F1] rounded-[50%] border-none relative transition-transform duration-[0.4s]' onClick={() => setShowCart(true)}> 
+          <button className='hidden p-3 bg-[#F1F1F1] rounded-[50%] border-none relative transition-transform duration-[0.4s]' onClick={() => setShowCart(true)}> 
             <CgShoppingCart size={22} />
             <span className='absolute top-0 right-[5px] text-xs	text-[#eee] bg-[#f02d34] w-[18px] h-[18px] rounded-[50%] text-center font-semibold'>{totalQty}</span>
           </button> 
-      } */}
+      }
 
       
         <div className='hidden'>

@@ -5,7 +5,9 @@ import {HiOutlineTrash} from 'react-icons/hi'
 import toast from 'react-hot-toast';
 import { useStateContext } from '@/context/StateContext';
 import getStripePromise from '@/lib/getStripe';
-
+import Image from 'next/image';
+import CartSummary from './cart-summary';
+import { CartItems } from './cart-items';
 interface IProduct {
    slug: string;
    name: string;
@@ -21,7 +23,7 @@ export default function Cart() {
   const {cartItems, totalPrice, totalQty, onRemove, toggleCartItemQuantity} = useStateContext();  
   let [isLoading, setLoading] = useState(false) 
 
-   console.log("cartItems ==> ", cartItems)
+  //  console.log("cartItems ==> ", cartItems)
 
       
       const createCheckOutSession = async () => {
@@ -51,35 +53,7 @@ export default function Cart() {
           .catch((err) => {  
             toast.dismiss(toastId);
             toast.error("checkout failed");
-          });
-      //   setLoading(true);
-      //   const stripe = await stripePromise;
-    
-      //   const checkoutSession = await fetch(
-      //     "http://localhost:3000/api/stripe",
-      //     {
-      //       method: "POST",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //       body: JSON.stringify(cartItems),
-      //     }
-      //   );
-    
-      //     console.log("Result------------- in prod page==========",  checkoutSession);
-    
-      // //   const sessionID= await checkoutSession.json();
-      // //   const result = await stripe?.redirectToCheckout({
-      // //     sessionId: sessionID,
-      // //   });
-      // //   if (result?.error) {
-      // //     alert(result.error.message);
-      // //   }
-      // //   setLoading(false);
-      // // };
-      //  let data = await checkoutSession.json();
-      // return window.location.assign(data)
-  
+          });      
     
       }
  
@@ -99,34 +73,37 @@ export default function Cart() {
 
 
   return (
-    <div className='cart-wrapper' ref={cartRef}>
-    <h2>Shopping Cart</h2>
-    <div className='cart-container'>
-      <div className='cart-items'>
+    
+    <div className='cart-wrapper p-12' ref={cartRef}>
+    <h2 className='font-bold block text-[1.5rem] text-[#111] my-2 mx-0'>Shopping Cart</h2>
+    <div className='cart-container flex flex-col justify-between gap-16'>
+      <div className='cart-items flex flex-col justify-between mt-8 gap-16'>
         {cartItems.length < 1 && (
-          <div className='empty-cart'>
+          <div className='empty-cart flex justify-center items-center'>
             <AiOutlineShopping size={150} />
-            <h1>Your shopping bag is empty</h1>
+            <h1 className='font-bold block text-[2rem] text-[#111] font-Sora my-2 mx-0'>Your shopping bag is empty</h1>
           </div>
-        )}
+        )}        
 
         {cartItems.length >= 1 && cartItems.map((item) => (
-          <div key={item._id} className='item-card'>
-            <div className='item-image'>
-              <img src={item.image} alt='img' />
+          <div key={item._id} className='item-card flex flex-col'>
+            <div className='item-image w-[25%] h-[190px] rounded-[9px]'>
+              <Image src={item.image} alt={item.name} width={100} height={100} />
             </div>
-            <div className='item-details'>
-              <div className='name-and-remove'>
-                <h3>{item.name}</h3>  
-                <button type='button' onClick={() => onRemove(item)} className='remove-item'>
+            <div className='item-details flex flex-col justify-between w-[75%]'> 
+              <div className='name-and-remove flex justify-between'>
+                <h3 className='font-light text-[1.3rem] leading-[25px] text-[#212121]'>{item.name}</h3>  
+                
+                <button type='button' onClick={() => onRemove(item)} className='remove-item bg-transparent border-none'>
                 <HiOutlineTrash size={28} />  
                 </button>
-              </div>
-              <p className='item-tag'>Dress</p>
-              <p className='delivery-est'>Delivery Estimation</p>
-              <p className='delivery-days'>5 Working Days</p>
-              <div className='price-and-qty'>
-                <span className='price'>${item.price * item.quantity}</span>  
+              </div>             
+              <p className='item-tag font-semibold text-base leading-[22px] text-[#212121]'>Dress</p>
+              <p className='delivery-est font-semibold text-base leading-[22px] text-[#212121]'>Delivery Estimation</p>
+              <p className='delivery-days font-semibold text-base leading-[22px] text-[#212121]'>5 Working Days</p>
+              <div className='price-and-qty flex justify-between font-bold leading-[20px] tracking-widest text-[#212121]'>
+              
+                <span className='price font-bold leading-[20px] tracking-widest text-[#212121]'>${item.price * item.quantity}</span>  
                 <div>
                   <span className='minus' onClick={() => toggleCartItemQuantity(item._id, 'dec')}><AiOutlineMinus /></span>
                   <span className='num'>{item.quantity}</span>
@@ -139,28 +116,30 @@ export default function Cart() {
       </div>
 
       {cartItems.length >= 1 && (
-      <div className='order-summary'>
-        <h3>Order Summary</h3>
-        <div className='qty'>
+      <div className='order-summary p-8 bg-[#FBFCFF] flex flex-col flex-1 gap-8'>
+        <h3 className='text-lg font-medium'>Order Summary</h3>
+        <div className='qty flex justify-between gap-16'>
           <p>Quantity</p>
           <span>{totalQty} Product</span>
         </div>
-        <div className='subtotal'>
+        <div className='subtotal flex justify-between gap-16'>
           <p>Sub Total</p>
           <span>${totalPrice}</span>
         </div>
-        {/* <div className='total'>
+        <div className='total'>
           <p>Total</p>
           <span>${totalPrice}</span>
-        </div>  */}
-        <div>
-          <button className='btn' type='button' onClick={createCheckOutSession}> {isLoading ? 'Processing...' : 'Process to Checkout'}</button>
+        </div> 
+        <div className='flex justify-between gap-16'>
+          <button className='btn flex items-center justify-center w-full font-semibold leading-[18px] bg-[#212121] py-[10px] text-white gap-2 font-Sora' type='button' onClick={createCheckOutSession}> {isLoading ? 'Processing...' : 'Process to Checkout'}</button>
         </div>         
       </div>
       )}  
+          
 
-    </div>
+    </div>   
   </div>
+
   )
 }
 

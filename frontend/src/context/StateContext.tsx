@@ -62,6 +62,7 @@ export const StateContext = ({ children }: any) => {
     setTotalPrice((prevTotalPrice) => prevTotalPrice -foundProduct.price * foundProduct.quantity);
     setTotalQty(prevTotalQty => prevTotalQty - foundProduct.quantity);
     setCartItems(() => newCartItems);
+    
   }
 
   const toggleCartItemQuantity = (_id: string, value: any) => {

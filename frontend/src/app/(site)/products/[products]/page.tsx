@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect, useContext } from 'react'
 import { groq } from "next-sanity";
 import { client } from "@/lib/sanityClient";
@@ -7,6 +6,9 @@ import Image from "next/image";
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { CgShoppingCart } from "react-icons/cg";
 import { useStateContext } from "@/context/StateContext";
+import Counter from '@/components/Counter';
+import { AddButton } from '@/components/Button';
+
 
 type Props = {
     params: {
@@ -14,7 +16,7 @@ type Props = {
     };
 }
 
-export async function getProduct(slug: string) {
+async function getProduct(slug: string) {
   const query =  groq`*[_type == "product" && slug.current == "${slug}"][0]{
     _id,
     name,
@@ -33,15 +35,17 @@ export async function getProduct(slug: string) {
 
  
   async function ProductDetails({ params }: Props) {       
-    const {decQty, incQty, qty, onAdd} = useStateContext();    
+    // const {decQty, incQty, qty, onAdd} = useStateContext();    
     const slug = params.products;
-    let getProducts = await getProduct(slug);    
+    let getProducts = await getProduct(slug);   
+
+    
 
      
       return(       
        
-        <div className="container bg-[#FCFCFC] py-8 pl-8"> 
-         <div className='product-detail-container flex justify-space-between'>
+        <div className="sm:max-w-[450px] md:max-w-[950px] lg:max-w-[1400px] mt-[100px] px-4 md:px-10 mx-autobg-[#FCFCFC]"> 
+         <div className='product-detail-container flex justify-space-between'>s
           <div className='flex flex-[2] gap-8'>            
            <div className="flex flex-col gap-4"> 
             <Image src={getProducts.image} width={100} height={100} className="cursor-pointer" alt="dress" />
@@ -69,21 +73,25 @@ export async function getProduct(slug: string) {
             </ul>
           </div>
 
-          <div className='quantity-desc flex gap-2'>
-            <h4>Quantity: </h4>          
-              <span className='minus border-2 border-solid border-gray-200 bg-gray-200 mr-[10px] rounded-[60%] px-2 py-1 cursor-pointer' onClick={decQty}> <AiOutlineMinus /> </span>
-              <span className='num'> {qty} </span>
-              <span className='plus ml-[10px] border-2 border-solid border-black rounded-[60%] px-2 py-1 cursor-pointer' onClick={incQty}> <AiOutlinePlus /></span>
-          </div>
+          {/* // <div className='quantity-desc flex gap-2'>
+          //   <h4>Quantity: </h4>          
+          //     <span className='minus border-2 border-solid border-gray-200 bg-gray-200 mr-[10px] rounded-[60%] px-2 py-1 cursor-pointer' onClick={decQty}> <AiOutlineMinus /> </span>
+          //     <span className='num'> {qty} </span>
+          //     <span className='plus ml-[10px] border-2 border-solid border-black rounded-[60%] px-2 py-1 cursor-pointer' onClick={incQty}> <AiOutlinePlus /></span>
+          // </div> */}
 
-           {/* <Counter />  */}
+           <Counter /> 
 
           <div className='add-to-cart flex items-center gap-4'>          
-            <button className='flex justify-center items-center gap-2 btn w-[40%] text-[0.875rem] bg-[#212121] text-gray-100 p-[10px] leading-[18px]' type='button' onClick={() => onAdd(getProducts, qty)}>
-              <CgShoppingCart size={20} /> Add to Cart      
-            </button>
+            {/* // <button className='flex justify-center items-center gap-2 btn w-[40%] text-[0.875rem] bg-[#212121] text-gray-100 p-[10px] leading-[18px]' type='button' onClick={() => onAdd(getProducts, qty)}>
+            //   <CgShoppingCart size={20} /> Add to Cart      
+            // </button> */}
+            {/* <div> <onAddButton /> </div> */}
+            
             <p className='price font-bold text-[1.5rem] leading-[30px] tracking-widest text-[#212121]'>${getProducts.price}.00</p>  
-          </div>         
+          </div>  
+
+          <AddButton product={getProducts}/>       
           </div>
          </div>    
 
