@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     // if (session) {
       try {
         if (body.length != 0) {
-          const params: Stripe.Checkout.SessionCreateParams = {
+          const params: any = {
             submit_type: "pay",
             mode: "payment",
             payment_method_types: ["card"],
@@ -34,12 +34,12 @@ export async function POST(request: NextRequest) {
                     name: item.name,
                     images: [item.image],         
                     metadata: {
-                      _id: item._id,
-                      image: item.image,
-                      // productId: item._id,
-                      quantity: item.quantity,                      
-                      // type: item.category,
-                      name: item.name,
+                      // _id: item._id,
+                      // image: item.image,
+                      // // productId: item._id,
+                      // quantity: item.quantity,                      
+                      // // type: item.category,
+                      // name: item.name,
                   }
                
                   },

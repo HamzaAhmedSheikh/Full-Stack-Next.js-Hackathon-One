@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { HiOutlineTrash } from 'react-icons/hi';
 import toast from 'react-hot-toast';
 import getStripe from '@/lib/getStripe';
+import { loadStripe } from "@stripe/stripe-js";
 
 
 
@@ -16,20 +17,22 @@ export default function CartComponent() {
     // const cartRef: any = useRef();
   const {cartItems, totalPrice, totalQty, onRemove, toggleCartItemQuantity} = useStateContext(); 
   const [loading, setLoading] = useState(false);
-
+  
+ 
+  
   const createCheckOutSession = async () => {
     const toastId = toast.loading("trying checkout");
     const stripe = await getStripe();
-    console.log(
-      "handleCheckout ~ stripe:",
-      stripe
-    );
+    // console.log(
+    //   "handleCheckout ~ stripe:",
+    //   stripe
+    // );
 
     fetch(`api/stripe`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      cache: "no-cache",
-      body: JSON.stringify(cartItems),
+      cache: "no-store",
+      body: JSON.stringify({cartItems: cartItems}),
     })
       .then((response) => response.json())
       .then((response) => {
@@ -46,6 +49,38 @@ export default function CartComponent() {
         toast.error("checkout failed");
       });      
   }
+
+  const publishableKey = "pk_test_51NEAWFAbedfhBaKkXrvOtAOadiZIxa1A2aoeGFc6xaZs2Mxv5eOgkZK5A1Tac7GsV7fQJPvfgktoh6CtsidwqXTu00uEyI9K5q";
+  const stripePromise = loadStripe(publishableKey);
+
+  const _createCheckOutSession = async () => {
+    setLoading(true);
+    const stripe = await stripePromise;
+
+    const checkoutSession = await fetch(
+      "http://localhost:3000/api/create-stripe-session",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cartItems: cartItems,
+        }),
+      }
+    );
+
+      console.log("Result------------- in prod page==========",  checkoutSession);
+
+    const sessionID= await checkoutSession.json();
+    const result = await stripe?.redirectToCheckout({
+      sessionId: sessionID,
+    });
+    if (result?.error) {
+      alert(result.error.message);
+    }
+    setLoading(false);
+  };
 
   // const handlePayment = async () => {
   //   // try {
@@ -160,7 +195,7 @@ export default function CartComponent() {
               // disabled={loading}
               // title={!cartItems.length ? "Add Products First" : ""}
               className="flex items-center justify-center w-full font-semibold leading-[18px] bg-[#212121] py-[10px] text-white gap-2"
-              onClick={createCheckOutSession}
+              onClick={_createCheckOutSession}
             >
               Proceed to Payment
               {/* {state.cart.length ? "Proceed to Checkout"  } */}

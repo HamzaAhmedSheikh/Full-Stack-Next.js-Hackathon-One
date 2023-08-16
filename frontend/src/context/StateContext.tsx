@@ -2,6 +2,20 @@
 import {createContext, useContext, useState, useEffect, ReactNode, SetStateAction, Dispatch  } from 'react';
 import { toast } from 'react-hot-toast';
 
+interface ICartItems {
+  tags: string,
+  price: number,
+  slug: string,
+  image: string,
+  details: string[],
+  care: string[],
+  _id: string,
+  name: string,
+  quantity: number
+
+
+}
+
 type ShoppingCartContext = {
   onAdd: (product: any, quantity: number) => void;  
   toggleCartItemQuantity: (_id: string, value: SetStateAction<string>) => void;
@@ -14,7 +28,7 @@ type ShoppingCartContext = {
   setTotalQty: Dispatch<SetStateAction<number>>,
   totalQty: number;
   setCartItems: Dispatch<SetStateAction<any[]>>
-  cartItems: any[];
+  cartItems: any;
   setTotalPrice: Dispatch<SetStateAction<number>>
   totalPrice: number;  
 }
