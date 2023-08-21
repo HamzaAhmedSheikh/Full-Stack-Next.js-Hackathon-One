@@ -12,6 +12,7 @@ import { getProducts } from '../../../sanity/schemas/sanity-utils';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import ProductCard from '@/components/ProductCard'
+import Products from '@/components/Products';
 
 export default async function Home() {
   const products = await getProducts();
@@ -19,13 +20,13 @@ export default async function Home() {
    <>
     <HeroBanner />
     <Promote />
+    <Products />
 
-
-    <div className=''>
-        <div className='subtitle flex flex-col justify-evenly text-center mt-20'>
+    {/* <div className=''> */}
+        {/* <div className='subtitle flex flex-col justify-evenly text-center mt-20'>
           <span className='font-bold text-[12px] leading-[15px] tracking-widest text-[#0062F5]'>PRODUCTS</span>
           <h2 className='font-bold text-[32px] leading-[40px] text-center tracking-[0.03em] text-[#212121]'>Check What We Have</h2>
-        </div>
+        </div> 
                 <Swiper
                     modules={[Autoplay]}
                     spaceBetween={150}
@@ -48,7 +49,7 @@ export default async function Home() {
                     }}     
                     // className='px-8'               
                 >
-                    {/*Slide 1 */}
+                    Slide 1 
                    
                      <div>            
                     {products?.map((product: any) => (      
@@ -59,8 +60,11 @@ export default async function Home() {
                     </div>              
                 
                 </Swiper>
-            </div>        
+                */}
+            {/* </div>         */}
 
+
+    
       
             
        

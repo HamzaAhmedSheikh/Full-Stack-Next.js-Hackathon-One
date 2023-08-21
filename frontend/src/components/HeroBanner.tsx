@@ -7,7 +7,7 @@ import featured1 from "../../public/images/Featured1.png";
 import featured2 from "../../public/images/Featured2.png";
 import featured3 from "../../public/images/Featured3.png";
 import featured4 from "../../public/images/Featured4.png";
-
+import StartShopping from "./StartShopping";
 
 export default function HeroBanner() {
     return (
@@ -49,9 +49,9 @@ export default function HeroBanner() {
                     <Image src={featured2} alt='Featured 2' width={100} height={100} />
                     <Image src={featured3} alt='Featured 3' width={100} height={100} />
                     <Image src={featured4} alt='Featured 4' width={100} height={100} />
-                </div> */}
+                </div>  */}
 
-                <div className="flex flex-row mt-2">
+                <div className="flex flex-row">
                   <div className="flex md:flex-row flex-col">
                     <div className="mx-2">
                      <Image src={featured1} alt='Featured 1' width={120} height={150} />
@@ -79,7 +79,8 @@ export default function HeroBanner() {
                     <Image src={headerImg} alt='Hero Picture' width={800} height={800} className=" mt-[-2rem]" />
                 </div>
             </div>
-        </section>
+        </section>  
+   
         </>
     )
 }

@@ -19,7 +19,7 @@ export function CartItems() {
       role="list"
       className="divide-y divide-gray-200 border-y border-gray-200 dark:divide-gray-500 dark:border-gray-500"
     >
-      {cartItems.length >= 1 && cartItems.map((product, productIdx) => (
+      {cartItems.length >= 1 && cartItems.map((product: any, productIdx: any) => (
         <li key={"key"} className="flex py-6 sm:py-10">
           <div className="shrink-0">
             <Image

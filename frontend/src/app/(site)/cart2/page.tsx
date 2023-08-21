@@ -110,6 +110,9 @@ export default function CartComponent() {
   // };
 
 
+   
+
+
   return(
     <>
         <main>
@@ -205,6 +208,8 @@ export default function CartComponent() {
         </div>
       )}
     </main>
+
+
     </>
     )
 }

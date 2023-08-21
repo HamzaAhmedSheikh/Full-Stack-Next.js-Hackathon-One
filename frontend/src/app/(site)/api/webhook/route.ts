@@ -69,8 +69,8 @@ const webhookSecret = "whsec_a825e26a2c544f4531f9dc68c091475d2b1c3206b11f5696d55
    
 // }
 
-import { db } from "@/lib/scehemas/drizzle";
-import { Orders, NewOrder } from "@/lib/scehemas/order";
+import { db } from "@/lib/schema/drizzle";
+import { orders, NewOrder } from "@/lib/schema/order";
 // import { NextRequest, NextResponse } from "next/server";
 // import Stripe from "stripe";
 import { v4 as uuidv4 } from 'uuid';
@@ -136,9 +136,12 @@ export async function POST(request: NextRequest, res: any) {
         if ( 'checkout.session.completed' === event.type ) {
             const session = event.data.object;
     
-            console.log( 'payment success-----------------------', session );
-            console.log(" event data object", event.data.object.id);
-            console.log(" metadate ", event.data.object.metadata)
+            console.log( 'session metadata === ', session.metadata);
+            console.log( 'session image === ', session.metadata.images);
+            // console.log(" event data object", event.data.object);
+            console.log( " name === ", event.data.object.customer_details.name);
+            console.log(" id === ", session.metadata._id)
+            // console.log(" metadate ", event.data.object.metadata)
             // const line_Items  = await stripe.checkout.sessions.listLineItems(event.data.object!.id);
             // console.log("lineItems === ", line_Items)
         // console.log("metadata == ", line_Items.metadata);
@@ -146,6 +149,30 @@ export async function POST(request: NextRequest, res: any) {
     
         //Once you'll get data you can use it according to your 
         //reqirement for making update in DB
+        if (event.type === 'checkout.session.completed') {
+            try {
+    
+                const data: any = event.data.object;
+                console.log("datat============================>>>>>>>>>>>>>>", data.metadata
+                );
+                
+                // const customer: any = await stripe.customers.retrieve(data.customer)
+                // console.log("customer == ", customer);
+                // const listLineItems = await stripe.checkout.sessions.listLineItems(data.id)
+                let newOrder: NewOrder = {
+                    product_id: data.metadata._id,
+                    user_name: event.data.object.customer_details.name,
+                    product_name: data.metadata.name,
+                    product_image: data.metadata.images,
+                    quantity: data.metadata.quantity,                             
+                }
+                const order = await db.insert(orders).values(newOrder).returning();
+                console.log('order === ', order)
+            }
+            catch (err) {
+                console.log("error === ", err)
+            }
+        }
     
             
         } else {
@@ -159,3 +186,12 @@ export async function POST(request: NextRequest, res: any) {
         }
     return NextResponse.json({ message: "done" })
 }
+
+// CREATE TABLE orders(
+//     id SERIAL PRIMARY KEY,
+//     product_id VARCHAR(255) NOT NULL,
+//     user_name VARCHAR(255) NOT NULL,
+//     product_name VARCHAR(255) NOT NULL, 
+//     product_image TEXT NOT NULL 
+//     quantity INT NOT NULL
+//   )

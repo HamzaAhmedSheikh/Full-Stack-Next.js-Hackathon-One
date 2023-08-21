@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 import logo from "../../public/images/Logo.png";
 import { CgShoppingCart } from 'react-icons/cg';
 import { CiSearch } from 'react-icons/ci';
-
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 
 export default function Header() {
 
@@ -77,7 +77,23 @@ export default function Header() {
               placeholder='What you looking for'/>
           </div>
      
-        
+          <div className="flex flex-col items-center">
+              <div className="flex justify-center">
+                <SignedOut>
+                  <SignInButton mode="modal" afterSignInUrl={"/"}>
+                    <button className="text-white bg-[#212121] px-8 py-2 rounded-md">
+                      Sign in
+                    </button>
+                  </SignInButton>
+                </SignedOut>
+                <SignedIn>
+                  <div className="flex gap-10 items-center">
+                    <UserButton  afterSignOutUrl={"/"} />                   
+                  </div>
+                </SignedIn>
+              </div>
+           </div>   
+
         <Link href='/cart2'>   
           <button className='flex p-3 bg-[#F1F1F1] rounded-[50%] border-none relative transition-transform duration-[0.4s]'>   
             <CgShoppingCart size={22} /> 
@@ -86,6 +102,8 @@ export default function Header() {
             
           </button>          
         </Link> 
+
+
             </nav>
             {menu === false &&
                 <nav className='flex items-center justify-between lg:hidden px-4 md:px-10 '>

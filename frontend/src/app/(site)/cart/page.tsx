@@ -74,7 +74,7 @@ export default function Cart() {
 
   return (
     
-    <div className='cart-wrapper p-12' ref={cartRef}>
+    <div className='cart-wrapper p-12 basis-3/4' ref={cartRef} >
     <h2 className='font-bold block text-[1.5rem] text-[#111] my-2 mx-0'>Shopping Cart</h2>
     <div className='cart-container flex flex-col justify-between gap-16'>
       <div className='cart-items flex flex-col justify-between mt-8 gap-16'>
@@ -85,7 +85,7 @@ export default function Cart() {
           </div>
         )}        
 
-        {cartItems.length >= 1 && cartItems.map((item) => (
+        {cartItems.length >= 1 && cartItems.map((item: any) => (
           <div key={item._id} className='item-card flex flex-col'>
             <div className='item-image w-[25%] h-[190px] rounded-[9px]'>
               <Image src={item.image} alt={item.name} width={100} height={100} />

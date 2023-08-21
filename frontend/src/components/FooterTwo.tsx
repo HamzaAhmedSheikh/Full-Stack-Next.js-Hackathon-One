@@ -1,9 +1,92 @@
 import logo from "../../public/images/Logo.png";
 import Image from "next/image";
-import {GrFacebookOption, GrTwitter, GrLinkedinOption} from 'react-icons/gr'
+import Link from "next/link";
+// import {GrFacebookOption, GrTwitter, GrLinkedinOption} from 'react-icons/gr'
+import { FaFacebook, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 
 export default function FooterTwo() {
+    const date = new Date();
+    const year = date.getFullYear();
+   
     return (
+      // <footer className="text-[#666666] mt-20">
+      //  <section className="lg:px-10 px-5 max-w-[1240px] mx-auto mt-10">
+      //  <div className="flex flex-col w-full lg:flex-row justify-between lg:items-start mb-10">
+      //     {/* image and its content */}
+      //     <div className="w-2/6 flex flex-col gap-12 lg:mt-6 ">
+      //       <Image src="/Logo.webp" alt="logo" width={100} height={100} />
+      //       <p>
+      //         Small, artisan label that offers a thoughtfully curated collection
+      //         of high quality everyday essentials made.
+      //       </p>
+      //       <div className="flex items-start gap-x-5">
+      //         <div className="w-10 flex justify-center items-center h-10 rounded-xl bg-gray-200">
+      //           {" "}
+      //           <FaTwitter fill="black" color="black" />
+      //         </div>
+      //         <div className="w-10 flex justify-center items-center h-10 rounded-xl bg-gray-200">
+      //           <FaFacebook fill="black" color="black" />
+      //         </div>
+      //         <div className="w-10 flex justify-center items-center h-10 rounded-xl bg-gray-200">
+      //           <FaLinkedinIn fill="black" color="black" />
+      //         </div>
+      //       </div>
+      //     </div>
+
+      //     {/* company and its content */}
+      //     <div className="w-[20%] flex flex-col gap-3">
+      //       <h3>Company</h3>
+      //       <Link href={""}>About</Link>
+      //       <Link href={""}>Terms of Use</Link>
+      //       <Link href={""}>Privacy Policy</Link>
+      //       <Link href={""}>How it Works</Link>
+      //       <Link href={""}>Contact Us</Link>
+      //     </div>
+
+      //     {/* Support and its content */}
+      //     <div className="w-[20%] flex flex-col gap-3">
+      //       <h3>Support</h3>
+      //       <Link href={""}>Support Carrer</Link>
+      //       <Link href={""}>24h Services</Link>
+      //       <Link href={""}>Quick Chat</Link>
+      //     </div>
+
+      //     {/* Contact and its content */}
+      //     <div className="w-[20%] flex flex-col gap-3">
+      //       <h3>Contact</h3>
+      //       <Link href={""}>Whatsapp</Link>
+      //       <Link href={""}>Support 24h</Link>
+      //     </div>
+      //   </div>        
+      //  </section>
+
+      //     {/* copyright and its content */}
+      // <div className="border-t border-black w-full">
+      //   <div className=" max-w-[1240px] w-full mx-auto lg:px-20 py-5 px-8">
+      //     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-5">
+      //       <div className="">Copyright &copy; {year} Dine Market </div>
+      //       <div className="">
+      //         Design by:{" "}
+      //         <Link
+      //           href={"my-resume-nu-ten.vercel.app/"}
+      //           className="font-bold text-black"
+      //         >
+      //           Hamza Ahmed Sheikh
+      //         </Link>
+      //       </div>
+      //       <div className="">
+      //         Code by:{" "}
+      //         <Link
+      //           href={"https://github.com/HamzaAhmedSheikh"}
+      //           className="font-bold text-black"
+      //         >
+      //           HamzaAhmedSheikh on Github
+      //         </Link>
+      //       </div>
+      //     </div>
+      //   </div>
+      // </div>
+      // </footer> 
       <footer className="bg-white ">
         <div className="grid lg:grid-cols-5 grid-cols-1 max-lg:gap-8 py-12 2xl:px-32 xl:px-24 md:px-16 px-8 gap-16">
           <div className="flex flex-col justify-between md:items-start">

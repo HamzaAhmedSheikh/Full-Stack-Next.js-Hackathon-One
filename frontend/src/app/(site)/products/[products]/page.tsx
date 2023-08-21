@@ -45,7 +45,7 @@ async function getProduct(slug: string) {
       return(       
        
         <div className="sm:max-w-[450px] md:max-w-[950px] lg:max-w-[1400px] mt-[100px] px-4 md:px-10 mx-autobg-[#FCFCFC]"> 
-         <div className='product-detail-container flex justify-space-between'>s
+         <div className='product-detail-container flex justify-space-between'>
           <div className='flex flex-[2] gap-8'>            
            <div className="flex flex-col gap-4"> 
             <Image src={getProducts.image} width={100} height={100} className="cursor-pointer" alt="dress" />

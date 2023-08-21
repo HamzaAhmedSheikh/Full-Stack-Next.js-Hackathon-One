@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import feature from 'public/feature.webp'
+import Wrapper from './Wrapper';
+
 export default function Features() {
   return (
   //   <section className='features-section mt-16'>
@@ -46,7 +48,7 @@ export default function Features() {
   // </section>
 
   <>
-      <div className="mt-10 p-6 flex justify-start lg:justify-end  ">
+      <div className="p-6 flex justify-start lg:justify-end">
         <h2 className="text-4xl max-w-[350px] font-bold">Unique and Authentic Vintage Designer Jewellery</h2>
       </div>
 
@@ -89,7 +91,7 @@ export default function Features() {
             </div>
           </div>
         </div>
-      </div>
+      </div>     
     </>
   );
 }
