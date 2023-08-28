@@ -161,7 +161,7 @@ function Navbar()  {
 
 
         <div className="hidden lg:flex items-center justify-between gap-2">       
-          <Link href={"/cart2"} onClick={handleNav}>
+          <Link href={"/cart"} onClick={handleNav}>
             <div className="w-10 h-10 rounded-full bg-[#f1f1f1] flex justify-center items-center relative">
               <AiOutlineShoppingCart size={25} />
               <span className="absolute left-7 bottom-7 w-5 h-5 bg-[#f02d34] text-white text-xs rounded-full flex justify-center items-center">
