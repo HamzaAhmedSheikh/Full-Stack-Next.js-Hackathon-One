@@ -29,7 +29,7 @@ export default function ProductSection() {
                     modules={[Autoplay]}
                     spaceBetween={150}
                     slidesPerView={3}
-                    autoplay={{ delay: 10000 }}
+                    autoplay={{ delay: 1000 }}
                     breakpoints={{
                         320: {
                             slidesPerView: 1,

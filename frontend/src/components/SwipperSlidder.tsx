@@ -15,6 +15,7 @@ const SwipperSlidder: any = async () => {
       <Swiper
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
+        autoplay={{ delay: 1000 }}
         breakpoints={{
           320: {
             slidesPerView: 1,
