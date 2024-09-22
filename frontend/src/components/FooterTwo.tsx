@@ -98,7 +98,7 @@ export default function FooterTwo() {
 
       <footer className="bg-gray-800 text-white px-4">
        <div className="container mx-auto text-center">
-        <p className="text-sm font-bold ">Developed by Hamza</p>
+        <p className="text-sm font-bold "> Developed by Hamza </p>
        </div>
       </footer>
       </>
